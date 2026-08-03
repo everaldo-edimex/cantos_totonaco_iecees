@@ -1,0 +1,7 @@
+import { Heart } from "lucide-react";
+import { Link } from "react-router-dom";
+import { EmptyState } from "@/components/ui/EmptyState";
+import { useBibleFavorites } from "@/hooks/useBibleFavorites";
+import { useBibleVersion } from "@/hooks/useBibleVersion";
+import { getBibleVerse } from "@/services/bible";
+export default function BibleFavoritesPage() { const { version } = useBibleVersion(); const { favorites, toggleFavorite } = useBibleFavorites(); const verses = favorites.map((ref) => getBibleVerse(version, ref.book, ref.chapter, ref.verse)).filter((verse) => verse !== undefined); return <div className="page"><header className="page-title"><p className="eyebrow">{version}</p><h1>Versículos favoritos</h1><p>Tus favoritos se guardan por separado para cada traducción.</p></header>{verses.length ? <div className="bible-favorite-list">{verses.map((verse) => <article key={`${verse.bookUsfm}.${verse.chapter}.${verse.verse}`}><Link to={`/biblia/${verse.bookUsfm}/${verse.chapter}?versiculo=${verse.verse}`}><strong>{verse.reference}</strong><p>{verse.text}</p></Link><button onClick={() => toggleFavorite({ book: verse.bookUsfm, chapter: verse.chapter, verse: verse.verse })} aria-label={`Quitar ${verse.reference}`}><Heart fill="currentColor" /></button></article>)}</div> : <EmptyState icon={Heart} title="Aún no hay versículos favoritos" description="Toca el corazón de un versículo para guardarlo aquí." />}</div>; }
