@@ -27,6 +27,23 @@ export function AppLayout() {
       document.body.classList.remove("menu-open");
     };
   }, [mobileOpen]);
+  useEffect(() => {
+    const viewport = window.visualViewport;
+    if (!viewport) return;
+    const syncViewport = () => {
+      document.documentElement.style.setProperty("--visual-viewport-top", `${viewport.offsetTop}px`);
+      document.documentElement.style.setProperty("--visual-viewport-height", `${viewport.height}px`);
+    };
+    syncViewport();
+    viewport.addEventListener("resize", syncViewport);
+    viewport.addEventListener("scroll", syncViewport);
+    return () => {
+      viewport.removeEventListener("resize", syncViewport);
+      viewport.removeEventListener("scroll", syncViewport);
+      document.documentElement.style.removeProperty("--visual-viewport-top");
+      document.documentElement.style.removeProperty("--visual-viewport-height");
+    };
+  }, []);
   return (
     <div className={`app-shell ${collapsed ? "sidebar-is-collapsed" : ""}`}>
       <a className="skip-link" href="#main-content">

@@ -32,8 +32,19 @@ function SongPlaylistsPage() {
   const [deleting, setDeleting] = useState<SongPlaylist | null>(null);
   const results = useSongSearch(search);
   useEffect(() => {
-    document.body.classList.toggle("playlist-open", modalOpen);
-    return () => document.body.classList.remove("playlist-open");
+    if (!modalOpen) return;
+    const scrollTop = window.scrollY;
+    document.body.classList.add("playlist-open");
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollTop}px`;
+    document.body.style.width = "100%";
+    return () => {
+      document.body.classList.remove("playlist-open");
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      window.scrollTo(0, scrollTop);
+    };
   }, [modalOpen]);
 
   const openNew = () => {
