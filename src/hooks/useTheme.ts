@@ -10,6 +10,14 @@ export const themes: { id: Theme; name: string; colors: string[] }[] = [
   { id: "terracotta", name: "Tierra prometida", colors: ["#fff7f0", "#63372c", "#d47754"] }
 ];
 
+const browserColors: Record<Theme, string> = {
+  ivory: "#f8f7f2",
+  midnight: "#0d1724",
+  pure: "#f5f8fa",
+  forest: "#f1f5ef",
+  terracotta: "#fff7f0"
+};
+
 const preferredTheme = (): Theme =>
   window.matchMedia("(prefers-color-scheme: dark)").matches ? "midnight" : "ivory";
 
@@ -19,6 +27,7 @@ export function useTheme() {
   useEffect(() => {
     document.documentElement.dataset.theme = safeTheme;
     document.documentElement.classList.toggle("dark", safeTheme === "midnight");
+    document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')?.setAttribute("content", browserColors[safeTheme]);
   }, [safeTheme]);
   return {
     theme: safeTheme,
