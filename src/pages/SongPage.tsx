@@ -76,7 +76,8 @@ export default function SongPage() {
       const channel = `cantos-presentation-${song.numero}-${Date.now()}`;
       popup.moveTo(target.availLeft, target.availTop);
       popup.resizeTo(target.availWidth, target.availHeight);
-      popup.location.href = `/presentar/${song.numero}?channel=${encodeURIComponent(channel)}`;
+      const appBase = new URL(import.meta.env.BASE_URL, window.location.origin);
+      popup.location.href = `${appBase.href}#/presentar/${song.numero}?channel=${encodeURIComponent(channel)}`;
       popup.focus();
       projectionWindow.current = popup;
       setProjectionChannel(channel);

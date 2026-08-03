@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createHashRouter, RouterProvider } from "react-router-dom";
 import { AppLayout } from "@/layouts/AppLayout";
 
 const HomePage = lazy(() => import("@/pages/HomePage"));
@@ -14,7 +14,7 @@ const PresentationPage = lazy(() => import("@/pages/PresentationPage"));
 const BibleReaderPage = lazy(() => import("@/pages/BibleReaderPage"));
 const BiblePlaylistPage = lazy(() => import("@/pages/BiblePlaylistPage"));
 
-const router = createBrowserRouter([{ path: "/presentar/:numero", element: <PresentationPage /> }, { path: "/", element: <AppLayout />, children: [
+const router = createHashRouter([{ path: "/presentar/:numero", element: <PresentationPage /> }, { path: "/", element: <AppLayout />, children: [
   { index: true, element: <HomePage /> },
   { path: "buscar", element: <SearchPage /> },
   { path: "cantos", element: <SongsPage /> },
