@@ -4,6 +4,7 @@ import { Header } from "@/components/layout/Header";
 import { MobileSidebarOverlay } from "@/components/navigation/MobileSidebarOverlay";
 import { Sidebar } from "@/components/navigation/Sidebar";
 import { UpdatePrompt } from "@/components/ui/UpdatePrompt";
+import { InstallPrompt } from "@/components/ui/InstallPrompt";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useTheme } from "@/hooks/useTheme";
 import { useAccessibility } from "@/hooks/useAccessibility";
@@ -43,6 +44,7 @@ export function AppLayout() {
         <Outlet />
       </main>
       <UpdatePrompt />
+      <InstallPrompt />
     </div>
   );
 }

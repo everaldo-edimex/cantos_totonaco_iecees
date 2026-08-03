@@ -34,7 +34,7 @@ export function Header({
         <Menu />
       </button>
       <div className="brand">
-        <img src="/favicon-192.png" alt="" />
+        <img src={`${import.meta.env.BASE_URL}favicon-192.png`} alt="" />
         <span className="desktop-brand-text">
           {isBible ? "Santa Biblia" : "Cantos Evangélicos"}{" "}
           <em>{isBible ? "RVR / RVA" : isSpanish ? "Español Beta" : "Totonakú"}</em>
