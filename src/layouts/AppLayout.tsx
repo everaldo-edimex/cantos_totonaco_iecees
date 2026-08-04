@@ -30,20 +30,31 @@ export function AppLayout() {
   useEffect(() => {
     const viewport = window.visualViewport;
     if (!viewport) return;
+    const isIos = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    document.documentElement.classList.toggle("ios-device", isIos);
     const syncViewport = () => {
       document.documentElement.style.setProperty("--visual-viewport-top", `${viewport.offsetTop}px`);
       document.documentElement.style.setProperty("--visual-viewport-height", `${viewport.height}px`);
       document.documentElement.classList.toggle("keyboard-open", viewport.height < window.innerHeight - 120);
     };
+    const anticipateKeyboard = (event: FocusEvent) => {
+      const target = event.target;
+      if (window.innerWidth < 1024 && target instanceof HTMLElement && target.matches("input, textarea, select")) {
+        document.documentElement.classList.add("keyboard-open");
+      }
+    };
     syncViewport();
     viewport.addEventListener("resize", syncViewport);
     viewport.addEventListener("scroll", syncViewport);
+    document.addEventListener("focusin", anticipateKeyboard);
     return () => {
       viewport.removeEventListener("resize", syncViewport);
       viewport.removeEventListener("scroll", syncViewport);
+      document.removeEventListener("focusin", anticipateKeyboard);
       document.documentElement.style.removeProperty("--visual-viewport-top");
       document.documentElement.style.removeProperty("--visual-viewport-height");
       document.documentElement.classList.remove("keyboard-open");
+      document.documentElement.classList.remove("ios-device");
     };
   }, []);
   useEffect(() => {
