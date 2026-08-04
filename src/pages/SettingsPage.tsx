@@ -176,10 +176,10 @@ export default function SettingsPage() {
             <h2>Versión de la aplicación</h2>
             <p>
               {mode === "bible"
-                ? `Marina V1.0`
+                ? `MCP V1.0`
                 : mode === "spanish"
                   ? "Marina V2.0 Beta · Edición Español"
-                  : "Marina V1.0 · Edición Totonakú"}
+                  : "MCP V1.0 · Edición Totonakú"}
             </p>
           </div>
         </section>

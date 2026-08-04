@@ -97,7 +97,7 @@ export function AppLayout() {
         theme={theme}
         onTheme={toggleTheme}
       />
-      <Sidebar open={mobileOpen} collapsed={collapsed} onClose={() => setMobileOpen(false)} />
+      <Sidebar open={mobileOpen} collapsed={collapsed} onClose={() => window.innerWidth >= 1024 ? setCollapsed(true) : setMobileOpen(false)} />
       <MobileSidebarOverlay open={mobileOpen} onClose={() => setMobileOpen(false)} />
       <main id="main-content" className="app-main">
         <Outlet />
