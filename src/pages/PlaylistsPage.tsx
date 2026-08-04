@@ -165,7 +165,6 @@ function SongPlaylistsPage() {
             <header>
               <div>
                 <p className="eyebrow">{editing ? "Editar colección" : "Nueva colección"}</p>
-                <h2 id="playlist-dialog-title">{editing ? editing.title : "Crear una lista"}</h2>
               </div>
               <button onClick={close} aria-label="Cerrar">
                 <X />
