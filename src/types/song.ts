@@ -1,6 +1,6 @@
 export interface Verso {
   orden?: number;
-  tipo?: "coro";
+  tipo?: "coro" | "ultimo_coro";
   contenido: string;
 }
 

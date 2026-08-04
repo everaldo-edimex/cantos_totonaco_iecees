@@ -92,8 +92,8 @@ export function PresentationMode({ song, onClose, channelName, useFullscreen = t
     >
       <header><div><small>Canto {song.numero}</small><strong>{song.titulo}</strong></div><button onClick={close} aria-label="Cerrar presentación"><X /></button></header>
       <div className="presentation-progress" aria-label={`Diapositiva ${index + 1} de ${totalSlides}`}><span style={{ width: `${((index + 1) / totalSlides) * 100}%` }} /></div>
-      <main key={index} className={`${verse?.tipo === "coro" ? "is-chorus" : ""} ${isTitleSlide ? "is-title-slide" : ""}`}>
-        <span>{isTitleSlide ? `Canto ${song.numero}` : verse?.tipo === "coro" ? "Coro" : verse?.orden === undefined ? "Verso" : `Verso ${verse.orden}`}</span>
+      <main key={index} className={`${verse?.tipo ? "is-chorus" : ""} ${isTitleSlide ? "is-title-slide" : ""}`}>
+        <span>{isTitleSlide ? `Canto ${song.numero}` : verse?.tipo === "ultimo_coro" ? "Último coro" : verse?.tipo === "coro" ? "Coro" : verse?.orden === undefined ? "Verso" : `Verso ${verse.orden}`}</span>
         {isTitleSlide ? <h1>{song.titulo}</h1> : <p>{verse?.contenido || "Este canto no tiene versos."}</p>}
       </main>
       <footer><span>Desliza a la derecha o hacia arriba para continuar</span><small>{index + 1} / {totalSlides}</small></footer>
