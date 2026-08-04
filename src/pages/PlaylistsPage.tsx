@@ -35,11 +35,13 @@ function SongPlaylistsPage() {
     if (!modalOpen) return;
     const scrollTop = window.scrollY;
     document.body.classList.add("playlist-open");
+    document.documentElement.classList.add("playlist-editor-active");
     document.body.style.position = "fixed";
     document.body.style.top = `-${scrollTop}px`;
     document.body.style.width = "100%";
     return () => {
       document.body.classList.remove("playlist-open");
+      document.documentElement.classList.remove("playlist-editor-active");
       document.body.style.position = "";
       document.body.style.top = "";
       document.body.style.width = "";
