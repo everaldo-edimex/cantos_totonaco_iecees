@@ -1,5 +1,5 @@
 import { ArrowLeft, ChevronLeft, ChevronRight, Presentation } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { FavoriteButton } from "@/components/songs/FavoriteButton";
 import { FontSizeControl } from "@/components/songs/FontSizeControl";
@@ -24,6 +24,10 @@ export default function SongPage() {
   const { isFavorite, toggleFavorite } = useFavorites();
   const font = useFontSize();
   const index = song ? songs.findIndex((item: Canto) => item.numero === song.numero) : -1;
+  useLayoutEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    document.scrollingElement?.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [mode, numero]);
   useEffect(() => {
     if (!song) return;
     const suffix = mode === "totonaku" ? "" : `:${mode}`;
